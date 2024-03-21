@@ -9,7 +9,7 @@ class Ball(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(temp,(100,100))
         self.rect = pygame.Rect(x-45, y-45, 45*2, 45*2)
         self.rect.center = (x,y)
-        self.size = (48,52)
+        self.size = (45,45)
 
     def BallUpdate(self,x,y):
         self.rect.center = (x,y)

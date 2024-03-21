@@ -22,6 +22,7 @@ isLoaded = False
 
 def playing(Difficulty):
 
+	global P1,H1,Balls,Holes
 	#Screen
 	pygame.init()
 	screen = pygame.display.set_mode((1280, 720))
@@ -39,11 +40,11 @@ def playing(Difficulty):
 	Balls.add(P1)
 
 	if Difficulty == 2:
-		B1 = Barrier(1280/4,720/4)
+		B1 = Barrier(1280/4,90)
 		B1.Rotate()
 		Barriers = pygame.sprite.Group()
 		Barriers.add(B1)
-		B2 = Barrier(1000,540)
+		B2 = Barrier(1000,630)
 		B2.Rotate()
 		Barriers.add(B2)
 	elif Difficulty == 3:
@@ -63,8 +64,14 @@ def playing(Difficulty):
 		H1 = Hole(random.randint(50,1230),random.randint(50,670))
 		Holes = pygame.sprite.Group()
 		Holes.add(H1)
-		if Difficulty != 1:
-			while pygame.sprite.spritecollide(H1,Barriers,False) or (H1.rect.centerx < 600 and H1.rect.centerx >320):
+		if Difficulty == 2:
+			while pygame.sprite.spritecollide(H1,Barriers,False) or (H1.rect.centerx < 1000 and H1.rect.centerx > 320):
+				H1.kill()
+				H1 = Hole(random.randint(50,1230),random.randint(50,670))
+				Holes = pygame.sprite.Group()
+				Holes.add(H1)
+		elif Difficulty == 3:
+			while pygame.sprite.spritecollide(H1,Barriers,False) or (H1.rect.centery < 420 and H1.rect.centery >220):
 				H1.kill()
 				H1 = Hole(random.randint(50,1230),random.randint(50,670))
 				Holes = pygame.sprite.Group()
@@ -93,11 +100,11 @@ def playing(Difficulty):
 
 	def Reset():
 		global player_pos,P1,xSpeed,ySpeed
+		if bool(Balls) == True:
+			P1.kill()
 		H1.kill()
 		HolePosition()
 		player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-		if bool(Balls) == True:
-			P1.kill()
 		P1 = Ball(player_pos.x,player_pos.y)
 		Balls.add(P1)
 		xSpeed = ySpeed = 0
@@ -316,7 +323,7 @@ def menu():
 									LoadThread.start()
 								else:
 									LoadThread.returnValue = True
-							elif DelaySW.secondsPassed() >= 1:
+							elif DelaySW.secondsPassed() >= 1 or isConnected == False:
 								pygame.mixer.music.play()
 								isLoading = True
 								isPlaying = True
@@ -359,7 +366,7 @@ def menu():
 								LoadThread.returnValue = False
 								isPlaying = False							
 						elif Settings.checkForInput(pygame.mouse.get_pos()) or (Settings.isChosen == True and isTouched == 1):
-							if DelaySW.EndTime != 0 and DelaySW.secondsPassed() >= 1:
+							if DelaySW.EndTime != 0 and DelaySW.secondsPassed() >= 1 or isConnected == False:
 								isSettings = True
 								isTouched = 0
 								pygame.mixer.music.play()
@@ -377,7 +384,7 @@ def menu():
 									serialPort.close()
 								isConnected = False
 								vid.stop()
-							elif DelaySW.secondsPassed() >= 1:
+							elif DelaySW.secondsPassed() >= 1 or isConnected == False:
 								pygame.mixer.music.play()
 								isTouched = 0
 								if isConnected == True:
@@ -387,21 +394,21 @@ def menu():
 								DelaySW.start()
 					else:
 						if Easy.checkForInput(pygame.mouse.get_pos()) or (Easy.isChosen == True and isTouched == 1):
-							if DelaySW.secondsPassed() >= 1:
+							if DelaySW.secondsPassed() >= 1 or isConnected == False:
 								pygame.mixer.music.play()
 								isTouched = 0
 								Difficulty = 1
 								isSettings = False
 								DelaySW.start()
 						elif Medium.checkForInput(pygame.mouse.get_pos()) or (Medium.isChosen == True and isTouched == 1):
-							if DelaySW.secondsPassed() >= 1:
+							if DelaySW.secondsPassed() >= 1 or isConnected == False:
 								pygame.mixer.music.play()
 								isTouched = 0
 								Difficulty = 2
 								isSettings = False
 								DelaySW.start()
 						elif Extreme.checkForInput(pygame.mouse.get_pos()) or (Extreme.isChosen == True and isTouched == 1):
-							if DelaySW.secondsPassed() >= 1:	
+							if DelaySW.secondsPassed() >= 1 or isConnected == False:	
 								pygame.mixer.music.play()
 								isTouched = 0
 								Difficulty = 3
@@ -467,7 +474,7 @@ def menu():
 								xRot = float(ReadThread.returnValue[0])
 								yRot = float(ReadThread.returnValue[1])
 								isTouched = int(ReadThread.returnValue[2])
-							if yRot > 180 and yRot < 320:
+							if yRot > 30 and yRot <= 180:
 								mousePos = (Start.x_pos,Start.y_pos)
 							elif xRot > 30 and xRot < 180:
 								mousePos = (Quit.x_pos,Quit.y_pos)
@@ -489,11 +496,11 @@ def menu():
 							if ReadThread.returnValue is not None:
 								yRot = float(ReadThread.returnValue[1])
 								isTouched = int(ReadThread.returnValue[2])
-								if yRot > 180 and yRot < 320:
+								if yRot > 30 and yRot <= 180:
 									mousePos = (Easy.x_pos,Easy.y_pos)
-								elif yRot > 350 or yRot <= 30:
+								elif yRot > 320 or yRot <= 30:
 									mousePos = (Medium.x_pos,Medium.y_pos)
-								elif yRot > 30 and yRot < 180:
+								elif yRot > 180 and yRot <= 320:
 									mousePos = (Extreme.x_pos,Extreme.y_pos)
 								button.changeColor(mousePos)
 								button.update(settingsSurf)
