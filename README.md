@@ -7,11 +7,17 @@ https://github.com/H3SHAM03/Rehabilitation-Maze-Game/assets/115306247/05f0b798-9
 
 ## Hardware Components
 The following hardware components were used in the project: 
+
 • Arduino uno microcontroller: It serves as the brain of the system, responsible for data acquisition, processing, and control. 
+
 • Tilt sensors: utilized to detect the orientation of the device or objects, providing input for various activities. 
+
 • Touch sensors: incorporated to detect physical contact or pressure, enabling interactive manipulation of objects. 
-• Bluetooth modules: enable wireless communication between the system and external devices such as smartphones. Also connecting data logging for progress tracking, and synchronization with educational apps. 
+
+• Bluetooth modules: enable wireless communication between the system and external devices such as smartphones. Also connecting data logging for progress tracking, and synchronization with educational apps.
+
 • Breadboard: It provides a platform for connecting and prototyping the various components of the system. 
+
 • Jumper wires: They are used to establish connections between the Arduino, ultrasonic sensor, and breadboard.
 
 ## Prototype
