@@ -1,6 +1,6 @@
 # Rehabilitation Maze Game🎮
 ## Overview
-The Interactive Dexterity Enhancement System utilizes serious games to enhance the motor skills and dexterity of children with disabilities. Through interactive exercises and challenges, users engage with tilt sensors, touch sensors, and Bluetooth modules to complete tasks tailored to their abilities. Real-time feedback and progress tracking ensure personalized and effective skill development. By gamifying therapy sessions, the system promotes engagement, motivation, and social interaction. 
+The Interactive Dexterity Enhancement System utilizes serious games to enhance the motor skills and dexterity of children with disabilities using Python(mainly PyGame). Through interactive exercises and challenges, users engage with tilt sensors, touch sensors, and Bluetooth modules to complete tasks tailored to their abilities. Real-time feedback and progress tracking ensure personalized and effective skill development. By gamifying therapy sessions, the system promotes engagement, motivation, and social interaction. 
 
 ## Demo Video🎥
 https://github.com/H3SHAM03/Rehabilitation-Maze-Game/assets/115306247/05f0b798-9b6d-4290-886b-f6bf2a75efbb
